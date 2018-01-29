@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+    <title>Annai Before/After</title>
+    <script src='http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js'></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+    <script src="leaflet-bing-layer.js"></script>
+    <script src="leaflet-side-by-side.js"></script>
+    <link href='http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css' rel='stylesheet' />
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+
+    <script>
+    var BING_KEY = 'Atl5YqCdowXQjVVWO_T-SyEi5bIb3lLif77iQCSK-UgGji6Cq1J1AucxCQCjTt4q'
+
+    var map = L.map('map').setView([3.948411, -59.131813], 18)
+    var afterLayer = L.tileLayer('https://api.mapbox.com/styles/v1/elemuspablo/cjamus99c2ilv2rp7701yilnd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZWxlbXVzcGFibG8iLCJhIjoiY2oyaHpyM3o1MDB2bTJ4bnp5MndydHhrYyJ9.RjXVsiC_FtmIiR9GjHofjA', {
+        attribution:
+            'LEFT: Map tiles by the Inter-American Development Bank in Mapbox Studio, ' +
+            'Map data: OpenStreetMap; RIGHT: Bing Maps',
+        minZoom: 1,
+        maxZoom: 22
+    }).addTo(map)
+    var beforeLayer = L.tileLayer.bing(BING_KEY).addTo(map)
+
+
+    L.control.sideBySide(beforeLayer, afterLayer).addTo(map);
+    
+    </script>
+</body>
+</html>
